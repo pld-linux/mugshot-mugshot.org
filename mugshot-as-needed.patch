@@ -1,0 +1,14 @@
+diff -ur mugshot-1.1.45-o/Makefile-test-hippo-ipc.am mugshot-1.1.45/Makefile-test-hippo-ipc.am
+--- mugshot-1.1.45-o/Makefile-test-hippo-ipc.am	2007-01-11 04:15:31.000000000 -0700
++++ mugshot-1.1.45/Makefile-test-hippo-ipc.am	2007-07-26 14:42:37.000000000 -0600
+@@ -5,8 +5,7 @@
+ 	-I $(COMMONSRCDIR)/hippoipc	\
+ 	$(TEST_HIPPO_IPC_CFLAGS)
+ 
+-test_hippo_ipc_LDFLAGS=$(TEST_HIPPO_IPC_LIBS)
+-test_hippo_ipc_LDADD= libhippoipc.la
++test_hippo_ipc_LDADD=libhippoipc.la $(TEST_HIPPO_IPC_LIBS)
+ 
+ test_hippo_ipc_SOURCES=				\
+ 	hippoipc/test-hippo-ipc.cpp
+Only in mugshot-1.1.45: Makefile-test-hippo-ipc.am~
