@@ -29,8 +29,8 @@ BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	xulrunner-devel >= 1.5.0.4
 Requires(post,preun):	GConf2
-Requires(post.postun):	gtk+2
-Requires(post.postun):	hicolor-icon-theme
+Requires(post,postun):	gtk+2
+Requires(post,postun):	hicolor-icon-theme
 Requires:	loudmouth >= 1.0.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
