@@ -92,16 +92,23 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/mugshot
 %attr(755,root,root) %{_bindir}/mugshot-uri-handler
+%dir %{_libdir}/mugshot
+%dir %{_libdir}/mugshot/firefox
+%{_libdir}/mugshot/firefox/chrome
+%{_libdir}/mugshot/firefox/chrome.manifest
+%dir %{_libdir}/mugshot/firefox/components
+%{_libdir}/mugshot/firefox/components/*.xpt
+%attr(755,root,root) %{_libdir}/mugshot/firefox/components/*.so
+%{_libdir}/mugshot/firefox/defaults
+%{_libdir}/mugshot/firefox/install.rdf
+%{_datadir}/mugshot
+%{_datadir}/dbus-1/services/*.service
+%{_desktopdir}/mugshot.desktop
 %{_iconsdir}/hicolor/16x16/apps/*.png
 %{_iconsdir}/hicolor/22x22/apps/*.png
 %{_iconsdir}/hicolor/24x24/apps/*.png
 %{_iconsdir}/hicolor/32x32/apps/*.png
 %{_iconsdir}/hicolor/48x48/apps/*.png
 %{_iconsdir}/hicolor/128x128/apps/*.png
-%{_datadir}/mugshot
-%ghost %{_datadir}/mugshot/version
-%{_libdir}/mugshot
-%{_datadir}/dbus-1/services/*.service
-%{_desktopdir}/mugshot.desktop
 %{_datadir}/gnome/autostart/mugshot.desktop
 %{_sysconfdir}/gconf/schemas/*.schemas
