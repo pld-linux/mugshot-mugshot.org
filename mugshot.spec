@@ -1,12 +1,12 @@
 Summary:	Companion software for mugshot.org
 Summary(pl.UTF-8):	Oprogramowanie towarzyszące dla mugshot.org
 Name:		mugshot
-Version:	1.1.45
+Version:	1.1.46
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
-Source0:	http://developer.mugshot.org/download/sources/linux/%{name}-%{version}.tar.gz
-# Source0-md5:	2bb9f3f9ba0c34a6869749223d921ea9
+Source0:	http://download.mugshot.org/client/sources/linux/%{name}-%{version}.tar.gz
+# Source0-md5:	34c0bb6483ae8ad15d7a4377d22f09c5
 Patch0:		%{name}-as-needed.patch
 URL:		http://mugshot.org/
 BuildRequires:	autoconf >= 2.59
