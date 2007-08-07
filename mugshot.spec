@@ -2,16 +2,16 @@ Summary:	Companion software for mugshot.org
 Summary(pl.UTF-8):	Oprogramowanie towarzyszące dla mugshot.org
 Name:		mugshot
 Version:	1.1.46
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://download.mugshot.org/client/sources/linux/%{name}-%{version}.tar.gz
 # Source0-md5:	34c0bb6483ae8ad15d7a4377d22f09c5
 Patch0:		%{name}-as-needed.patch
 URL:		http://mugshot.org/
+BuildRequires:	GConf2-devel >= 2.8
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
-BuildRequires:	GConf2-devel >= 2.8
 BuildRequires:	curl-devel >= 7.15
 BuildRequires:	dbus-devel >= 1.0
 BuildRequires:	dbus-glib-devel >= 0.61
@@ -28,9 +28,9 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	xulrunner-devel >= 1.5.0.4
-Requires(post,preun):	GConf2
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
+Requires(post,preun):	GConf2
 Requires:	loudmouth >= 1.0.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -72,6 +72,9 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
+# Fix extension installer
+sed 's/firefox\*/mozilla-firefox/g' $RPM_BUILD_ROOT%{_datadir}/%{name}/firefox-update.sh
+
 # Don't package a .la file for the component .so
 rm -f $RPM_BUILD_ROOT%{_libdir}/mugshot/firefox/components/*.la
 
@@ -82,8 +85,12 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_install mugshot-uri-handler.schemas
 %update_icon_cache hicolor
 
+%{_datadir}/%{name}/firefox-update.sh install
+
 %preun
 %gconf_schema_uninstall mugshot-uri-handler.schemas
+
+%{_datadir}/%{name}/firefox-update.sh remove
 
 %postun
 %update_icon_cache hicolor
