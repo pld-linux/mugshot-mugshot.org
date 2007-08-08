@@ -74,9 +74,6 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
-# Fix extension installer
-sed 's/firefox\*/mozilla-firefox/g' $RPM_BUILD_ROOT%{_datadir}/%{name}/firefox-update.sh
-
 # Don't package a .la file for the component .so
 rm -f $RPM_BUILD_ROOT%{_libdir}/mugshot/firefox/components/*.la
 
