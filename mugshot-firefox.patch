@@ -1,0 +1,24 @@
+--- mugshot-1.1.46/firefox-update.sh~	2007-03-01 07:26:06.000000000 +0100
++++ mugshot-1.1.46/firefox-update.sh	2007-08-08 19:10:28.822756254 +0200
+@@ -9,8 +9,8 @@
+     for libdir in /usr/lib /usr/lib64 ; do
+ 	# Add symlinks to any firefox directory that looks like it is part of a
+ 	# currently installed package
+-	for d in $libdir/firefox* $libdir/iceweasel*; do
+-	    if [ "$d" = "$libdir/firefox*" -o "$d" = "$libdir/iceweasel*" ] ; then
++	for d in $libdir/firefox* $libdir/iceweasel* $libdir/mozilla-firefox*; do
++		if [ "$d" = "$libdir/firefox*" -o "$d" = "$libdir/iceweasel*" -o "$d" = "$libdir/mozilla-firefox*" ] ; then
+ 		continue
+ 	    fi
+ 	    link=$d/extensions/firefox@mugshot.org
+@@ -23,8 +23,8 @@
+ elif [ "$1" = "remove" ] ; then
+     for libdir in /usr/lib /usr/lib64 ; do
+ 	# Remove any symlinks we've created into any firefox directory
+-	for d in $libdir/firefox* $libdir/iceweasel*; do
+-	    if [ "$d" = "$libdir/firefox*" -o "$d" = "$libdir/iceweasel*" ] ; then
++	for d in $libdir/firefox* $libdir/iceweasel* $libdir/mozilla-firefox*; do
++	    if [ "$d" = "$libdir/firefox*" -o "$d" = "$libdir/iceweasel*" -o "$d" = "$libdir/mozilla-firefox*" ] ; then
+ 		continue
+ 	    fi
+ 	    link=$d/extensions/firefox@mugshot.org
