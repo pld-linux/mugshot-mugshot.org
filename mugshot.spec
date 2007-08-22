@@ -22,6 +22,7 @@ BuildRequires:	gnome-desktop-devel >= 2.10.0
 BuildRequires:	gnome-vfs2-devel >= 2.0
 BuildRequires:	gtk+2-devel >= 2:2.10
 BuildRequires:	libjpeg-devel >= 6b
+BuildRequires:	libssh2-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	loudmouth-devel >= 1.0.3
