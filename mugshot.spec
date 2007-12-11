@@ -55,10 +55,10 @@ Summary(pl.UTF-8):	Współdzielone biblioteki Mugshota
 Group:		Libraries
 
 %description libs
-Totem shared libraries.
+Mugshot shared libraries.
 
 %description libs -l pl.UTF-8
-Współdzielone biblioteki Totema.
+Współdzielone biblioteki Mugshota.
 
 %package devel
 Summary:	Mugshot header files
@@ -67,10 +67,10 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 
 %description devel
-Mugshot header files
+Mugshot header files.
 
 %description devel -l pl.UTF-8
-Pliki nagłówkowe mugshota.
+Pliki nagłówkowe Mugshota.
 
 %prep
 %setup -q
