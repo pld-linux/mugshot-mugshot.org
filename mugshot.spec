@@ -1,13 +1,12 @@
 Summary:	Companion software for mugshot.org
 Summary(pl.UTF-8):	Oprogramowanie towarzyszące dla mugshot.org
 Name:		mugshot
-Version:	1.1.46
-Release:	3
+Version:	1.1.56
+Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://download.mugshot.org/client/sources/linux/%{name}-%{version}.tar.gz
-# Source0-md5:	34c0bb6483ae8ad15d7a4377d22f09c5
-Patch0:		%{name}-as-needed.patch
+# Source0-md5:	9f9aa42ae2b6398773e520ecafeac470
 Patch1:		%{name}-firefox.patch
 URL:		http://mugshot.org/
 BuildRequires:	GConf2-devel >= 2.8
@@ -34,6 +33,7 @@ Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,preun):	GConf2
 Requires:	loudmouth >= 1.0.3
+Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -49,9 +49,31 @@ panelu, przeglądarki WWW, odtwarzacza muzyki i innych części
 serwisami online wykorzystywanymi przez użytkownika i jego znajomych.
 Jest zabawny i prosty w użyciu.
 
+%package libs
+Summary:	Mugshot shared libraries
+Summary(pl.UTF-8):	Współdzielone biblioteki Mugshota
+Group:		Libraries
+
+%description libs
+Totem shared libraries.
+
+%description libs -l pl.UTF-8
+Współdzielone biblioteki Totema.
+
+%package devel
+Summary:	Mugshot header files
+Summary(pl.UTF-8):	Pliki nagłówkowe Mugshota
+Group:		X11/Development/Libraries
+Requires:	%{name}-libs = %{version}-%{release}
+
+%description devel
+Mugshot header files
+
+%description devel -l pl.UTF-8
+Pliki nagłówkowe mugshota.
+
 %prep
 %setup -q
-%patch0 -p1
 %patch1 -p1
 
 %build
@@ -66,7 +88,6 @@ Jest zabawny i prosty w użyciu.
 	--with-xpidl=%{_bindir}/xpidl
 
 %{__make}
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -95,6 +116,9 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 %update_icon_cache hicolor
 
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/mugshot
@@ -119,5 +143,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/32x32/apps/*.png
 %{_iconsdir}/hicolor/48x48/apps/*.png
 %{_iconsdir}/hicolor/128x128/apps/*.png
-%{_datadir}/gnome/autostart/mugshot.desktop
+%{_datadir}/gnome/autostart/mugshot-autostart.desktop
 %{_sysconfdir}/gconf/schemas/*.schemas
+
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libddm-1.so.*.*.*
+
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/ddm-1
+%attr(755,root,root) %{_libdir}/libddm-1.so
+%{_libdir}/libddm-1.la
+%{_pkgconfigdir}/ddm-1.pc
