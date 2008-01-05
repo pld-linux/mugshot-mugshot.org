@@ -1,12 +1,12 @@
 Summary:	Companion software for mugshot.org
 Summary(pl.UTF-8):	Oprogramowanie towarzyszące dla mugshot.org
 Name:		mugshot
-Version:	1.1.56
+Version:	1.1.57
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://download.mugshot.org/client/sources/linux/%{name}-%{version}.tar.gz
-# Source0-md5:	9f9aa42ae2b6398773e520ecafeac470
+# Source0-md5:	30b0795ed4d99b4339c557a33d146757
 Patch1:		%{name}-firefox.patch
 URL:		http://mugshot.org/
 BuildRequires:	GConf2-devel >= 2.8
@@ -137,12 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_datadir}/mugshot/firefox-update.sh
 %{_datadir}/dbus-1/services/*.service
 %{_desktopdir}/mugshot.desktop
-%{_iconsdir}/hicolor/16x16/apps/*.png
-%{_iconsdir}/hicolor/22x22/apps/*.png
-%{_iconsdir}/hicolor/24x24/apps/*.png
-%{_iconsdir}/hicolor/32x32/apps/*.png
-%{_iconsdir}/hicolor/48x48/apps/*.png
-%{_iconsdir}/hicolor/128x128/apps/*.png
+%{_iconsdir}/hicolor/*/apps/*.png
 %{_datadir}/gnome/autostart/mugshot-autostart.desktop
 %{_sysconfdir}/gconf/schemas/*.schemas
 
