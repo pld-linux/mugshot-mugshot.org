@@ -1,25 +1,24 @@
 Summary:	Companion software for mugshot.org
 Summary(pl.UTF-8):	Oprogramowanie towarzyszące dla mugshot.org
 Name:		mugshot
-Version:	1.1.58
+Version:	1.1.93
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://download.mugshot.org/client/sources/linux/%{name}-%{version}.tar.gz
-# Source0-md5:	3506a6873bd24b339abd6d2fc44218fb
+# Source0-md5:	86d188b5edc211b3fb6735d2aae0f353
 Patch1:		%{name}-firefox.patch
 URL:		http://mugshot.org/
 BuildRequires:	GConf2-devel >= 2.8
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	curl-devel >= 7.15
-BuildRequires:	dbus-devel >= 1.0
-BuildRequires:	dbus-glib-devel >= 0.61
+BuildRequires:	desktop-data-model-devel
 BuildRequires:	desktop-file-utils
-BuildRequires:	glib2-devel >= 1:2.6
 BuildRequires:	gnome-desktop-devel >= 2.10.0
 BuildRequires:	gnome-vfs2-devel >= 2.0
 BuildRequires:	gtk+2-devel >= 2:2.10
+BuildRequires:	hippo-canvas-devel
 BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
@@ -28,12 +27,13 @@ BuildRequires:	pcre-devel >= 6.3
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	xorg-lib-libXScrnSaver-devel
-BuildRequires:	xulrunner-devel >= 1.5.0.4
+BuildRequires:	xulrunner-devel >= 1.18.1.13
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,preun):	GConf2
 Requires:	loudmouth >= 1.0.3
-Requires:	%{name}-libs = %{version}-%{release}
+Obsoletes:	mugshot-devel
+Obsoletes:	mugshot-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -49,29 +49,6 @@ panelu, przeglądarki WWW, odtwarzacza muzyki i innych części
 serwisami online wykorzystywanymi przez użytkownika i jego znajomych.
 Jest zabawny i prosty w użyciu.
 
-%package libs
-Summary:	Mugshot shared libraries
-Summary(pl.UTF-8):	Współdzielone biblioteki Mugshota
-Group:		Libraries
-
-%description libs
-Mugshot shared libraries.
-
-%description libs -l pl.UTF-8
-Współdzielone biblioteki Mugshota.
-
-%package devel
-Summary:	Mugshot header files
-Summary(pl.UTF-8):	Pliki nagłówkowe Mugshota
-Group:		X11/Development/Libraries
-Requires:	%{name}-libs = %{version}-%{release}
-
-%description devel
-Mugshot header files.
-
-%description devel -l pl.UTF-8
-Pliki nagłówkowe Mugshota.
-
 %prep
 %setup -q
 %patch1 -p1
@@ -84,7 +61,7 @@ Pliki nagłówkowe Mugshota.
 %{__autoconf}
 %configure \
 	--with-gecko-headers=%{_includedir}/xulrunner \
-	--with-gecko-idl=%{_includedir}/xulrunner/idl \
+	--with-gecko-idl=%{_datadir}/idl/xulrunner \
 	--with-xpidl=%{_bindir}/xpidl
 
 %{__make}
@@ -116,9 +93,6 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 %update_icon_cache hicolor
 
-%post	libs -p /sbin/ldconfig
-%postun	libs -p /sbin/ldconfig
-
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/mugshot
@@ -135,19 +109,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/mugshot
 %{_datadir}/mugshot/version
 %attr(755,root,root) %{_datadir}/mugshot/firefox-update.sh
-%{_datadir}/dbus-1/services/*.service
+%{_datadir}/mugshot/stacker.css
 %{_desktopdir}/mugshot.desktop
 %{_iconsdir}/hicolor/*/apps/*.png
 %{_datadir}/gnome/autostart/mugshot-autostart.desktop
 %{_sysconfdir}/gconf/schemas/*.schemas
-
-%files libs
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libddm-1.so.*.*.*
-
-%files devel
-%defattr(644,root,root,755)
-%{_includedir}/ddm-1
-%attr(755,root,root) %{_libdir}/libddm-1.so
-%{_libdir}/libddm-1.la
-%{_pkgconfigdir}/ddm-1.pc
