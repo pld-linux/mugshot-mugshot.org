@@ -13,25 +13,21 @@ BuildRequires:	GConf2-devel >= 2.8
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	curl-devel >= 7.15
-BuildRequires:	desktop-data-model-devel
-BuildRequires:	desktop-file-utils
-BuildRequires:	gnome-desktop-devel >= 2.10.0
-BuildRequires:	gnome-vfs2-devel >= 2.0
-BuildRequires:	gtk+2-devel >= 2:2.10
+BuildRequires:	dbus-glib-devel >= 0.60
+BuildRequires:	desktop-data-model-devel >= 1.2.0
+BuildRequires:	gtk+2-devel >= 2:2.10.0
 BuildRequires:	hippo-canvas-devel
 BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-BuildRequires:	loudmouth-devel >= 1.0.3
 BuildRequires:	pcre-devel >= 6.3
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	xorg-lib-libXScrnSaver-devel
-BuildRequires:	xulrunner-devel >= 1.18.1.13
+BuildRequires:	xulrunner-devel >= 1.8.1.13
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,preun):	GConf2
-Requires:	loudmouth >= 1.0.3
 Obsoletes:	mugshot-devel
 Obsoletes:	mugshot-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -113,4 +109,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/mugshot.desktop
 %{_iconsdir}/hicolor/*/apps/*.png
 %{_datadir}/gnome/autostart/mugshot-autostart.desktop
-%{_sysconfdir}/gconf/schemas/*.schemas
+%{_sysconfdir}/gconf/schemas/mugshot-uri-handler.schemas
