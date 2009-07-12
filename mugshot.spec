@@ -2,7 +2,7 @@ Summary:	Companion software for mugshot.org
 Summary(pl.UTF-8):	Oprogramowanie towarzyszące dla mugshot.org
 Name:		mugshot
 Version:	1.1.93
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://download.mugshot.org/client/sources/linux/%{name}-%{version}.tar.gz
