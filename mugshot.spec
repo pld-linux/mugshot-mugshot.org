@@ -2,7 +2,7 @@ Summary:	Companion software for mugshot.org
 Summary(pl.UTF-8):	Oprogramowanie towarzyszące dla mugshot.org
 Name:		mugshot
 Version:	1.1.93
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://download.mugshot.org/client/sources/linux/%{name}-%{version}.tar.gz
@@ -25,7 +25,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	xulrunner-devel >= 1.8.1.13
-Requires(post,postun):	gtk+2
+Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,preun):	GConf2
 Obsoletes:	mugshot-devel
